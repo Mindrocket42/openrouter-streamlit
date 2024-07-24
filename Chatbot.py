@@ -13,16 +13,20 @@ if "messages" not in st.session_state:
         {"role": "assistant", "content": "How can I help you?"}
     ]
 
+# Display the initial message above the text entry
+st.write("How can I help you?")
+
 with st.form("chat_input", clear_on_submit=True):
     a, b = st.columns([4, 1])
-    user_input = a.text_input(
+    user_input = a.text_area(
         label="Your message:",
-        placeholder="What would you like to say?",
+        placeholder="Start chatting here",
         label_visibility="collapsed",
+        height=100  # This sets the height to approximately 3 lines
     )
     b.form_submit_button("Send", use_container_width=True)
 
-for i, msg in enumerate(st.session_state.messages):
+for i, msg in enumerate(st.session_state.messages[1:], start=1):  # Skip the first message
     message(msg["content"], is_user=msg["role"] == "user", key=i)
 
 if user_input and not api_key:

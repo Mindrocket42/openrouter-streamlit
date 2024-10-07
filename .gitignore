@@ -3,3 +3,5 @@ venv
 secrets.toml
 .vscode
 __pycache__
+walk/
+.history/
